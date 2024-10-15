@@ -86,7 +86,7 @@ public class PersonRepository {
             predicates.add(builder.equal(person.get("passportId"), passportId));
         }
         if (eyeColor != null) {
-            predicates.add(builder.equal(person.get("eyeColor"), eyeColor));
+            predicates.add(builder.equal(person.get("eyeColor"), Color.valueOf(eyeColor)));
         }
         if (locationX != null) {
             predicates.add(builder.equal(person.get("location").get("x"), locationX));
