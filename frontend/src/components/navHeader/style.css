@@ -1,0 +1,35 @@
+header {
+  color: #007AFF;
+  font-size: 20px;
+  font-weight: 400;
+  background-color: #fff;
+  justify-items: end;
+  margin-bottom:30px;
+}
+
+.logo{
+  position: absolute;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  gap:50px;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+.navLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.activePage{
+  padding-bottom:10px;
+  border-bottom: 2px solid #007AFF;
+}
