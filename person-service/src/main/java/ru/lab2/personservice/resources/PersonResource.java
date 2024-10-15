@@ -91,4 +91,43 @@ public class PersonResource {
             return Response.status(Response.Status.BAD_REQUEST).entity("Validation Failed").build();
         }
     }
+
+    @GET
+    @Path("/count/less/{eye-color}")
+    public Response countLessEyeColor(@PathParam("eye-color") String eyeColor) {
+        try {
+            Long count = personRepository.countByEyeColorLessThan(eyeColor);
+            return Response.ok("amount: " + count).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Validation Failed").build();
+        }
+    }
+
+    @GET
+    @Path("/filter/less/{eye-color}")
+    public Response filterLessEyeColor(@PathParam("eye-color") String eyeColor) {
+        try {
+            List<Person> persons = personRepository.filterByEyeColorLessThan(eyeColor);
+            if(persons.isEmpty()) {
+                return Response.status(Response.Status.NOT_FOUND).entity("Not found item").build();
+            }
+            return Response.ok(persons).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Validation Failed").build();
+        }
+    }
+
+    @GET
+    @Path("/filter/more/{height}")
+    public Response filterMoreHeight(@PathParam("height") Double height) {
+        try {
+            List<Person> persons = personRepository.filterByHeightMoreThan(height);
+            if(persons.isEmpty()) {
+                return Response.status(Response.Status.NOT_FOUND).entity("Not found item").build();
+            }
+            return Response.ok(persons).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Validation Failed").build();
+        }
+    }
 }
