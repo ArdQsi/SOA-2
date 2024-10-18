@@ -4,20 +4,21 @@ import InputField from '../../common/InputField';
 import SelectField from '../../common/SelectField'
 import './style.css'
 
-const CreatePerson = () => {
+const UpdatePerson = () => {
+    const [id, setId] = useState("");
     const [name, setName] = useState("");
     const [x, setX] = useState("");
     const [y, setY] = useState("");
     const [height, setHeight] = useState("");
     const [birthday, setBirthday] = useState("");
     const [passportID, setPassportID] = useState("");
-    const [nationality, setNationality] = useState("RUSSIAN");
     const [eyeColor, setEyeColor] = useState("GREEN");
     const [locationX, setLocationX] = useState("");
     const [locationY, setLocationY] = useState("");
     const [locationZ, setLocationZ] = useState("");
     const [error, setError] = useState("");
     const [info, setInfo] = useState("");
+    const [nationality, setNationality] = useState("RUSSIAN");
 
     const eyeColorOptions = [
         { value: "GREEN", label: "GREEN" },
@@ -35,10 +36,10 @@ const CreatePerson = () => {
         { value: "GERMAN", label: "GERMAN" }
     ];
 
-
-    const handleCreateSubmit = async (e) => {
+    const handleUpdateSubmit = async (e) => {
         e.preventDefault();
-        const newPerson = {
+
+        const updatePerson = {
             name,
             coordinates: {
                 x: parseFloat(x),
@@ -56,10 +57,10 @@ const CreatePerson = () => {
             },
         };
 
-        axios.post('http://localhost:8080/persons', newPerson)
+        axios.put(`http://localhost:8080/persons/${id}`, updatePerson)
             .then(function (response) {
                 setError(null)
-                setInfo("Creation is successful")
+                setInfo("The update was successful.")
             })
             .catch(function (error) {
                 setInfo(null)
@@ -67,26 +68,27 @@ const CreatePerson = () => {
             });
     };
     return (
-        <div className='form-container'>
-            <h1>Create person</h1>
-            <form onSubmit={handleCreateSubmit}>
+        <>
+            <h1>Update person</h1>
+            <form onSubmit={handleUpdateSubmit}>
+                <InputField name="Id" value={id} type="text" setState={setId} />
                 <InputField name="Name" value={name} type="text" setState={setName} />
                 <InputField name="Coordinates X" value={x} type="number" setState={setX} />
                 <InputField name="Coordinates Y" value={y} type="number" setState={setY} />
                 <InputField name="Height" value={height} type="number" setState={setHeight} />
-                <InputField name="Birthday" value={birthday} type="datetime-local" setState={setBirthday} />
+                <InputField name="Birthday" value={height} type="datetime-local" setState={setBirthday} />
                 <InputField name="Passport ID" value={passportID} type="text" setState={setPassportID} />
                 <SelectField name="Nationality" value={nationality} options={nationalityOptions} setState={setNationality} />
                 <SelectField name="Eye color" value={eyeColor} options={eyeColorOptions} setState={setEyeColor} />
                 <InputField name="Location X" value={locationX} type="number" setState={setLocationX} />
                 <InputField name="Location Y" value={locationY} type="number" setState={setLocationY} />
                 <InputField name="Location Z" value={locationZ} type="number" setState={setLocationZ} />
-                <button type="submit">Create person</button>
+                <button type="submit">Update person</button>
             </form>
             <div className='error'> {error} </div>
             <div className='info'> {info} </div>
-        </div>
+        </>
     );
 };
 
-export default CreatePerson;
+export default UpdatePerson;

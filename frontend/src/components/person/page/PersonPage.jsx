@@ -1,12 +1,12 @@
 import NavHeader from '../../navHeader/NavHeader';
 import React from 'react';
-import CreatePerson from '../content/CreatePerson';
+import OperationWithPerson from '../content/OperationWithPerson';
 
 const PersonPage = () => {
   return (
     <>
       <NavHeader />
-      <CreatePerson />
+      <OperationWithPerson />
     </>
   );
 };

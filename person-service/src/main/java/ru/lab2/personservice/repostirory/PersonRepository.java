@@ -1,5 +1,7 @@
 package ru.lab2.personservice.repostirory;
 
+import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Provider
+@Stateless
 public class PersonRepository {
     @PersistenceContext(unitName = "default")
     private EntityManager em;

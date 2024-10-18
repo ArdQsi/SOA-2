@@ -1,5 +1,7 @@
 package ru.lab2.personservice.resources;
 
+import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -11,9 +13,10 @@ import java.util.List;
 @Path("/persons")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Stateless
 public class PersonResource {
     @Inject
-    PersonRepository personRepository;
+    private PersonRepository personRepository;
 
     @GET
     @Path("/{id}")
@@ -40,11 +43,11 @@ public class PersonResource {
     @Path("/{id}")
     public Response updatePerson(@PathParam("id") int id, Person person) {
         try{
-            Person personToUpdate = personRepository.findById(person.getId());
+            Person personToUpdate = personRepository.findById(id);
             if(personToUpdate == null) {
                 return Response.status(Response.Status.NOT_FOUND).entity("Not found item").build();
             }
-            person.setId(personToUpdate.getId());
+            person.setId(id);
             personRepository.update(person);
             return Response.ok(person).build();
         } catch (Exception e) {
@@ -121,6 +124,9 @@ public class PersonResource {
     @Path("/filter/more/{height}")
     public Response filterMoreHeight(@PathParam("height") Double height) {
         try {
+            if (height == null){
+                return Response.status(Response.Status.BAD_REQUEST).entity("Validation Failed").build();
+            }
             List<Person> persons = personRepository.filterByHeightMoreThan(height);
             if(persons.isEmpty()) {
                 return Response.status(Response.Status.NOT_FOUND).entity("Not found item").build();

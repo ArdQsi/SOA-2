@@ -7,10 +7,6 @@ header {
   margin-bottom:30px;
 }
 
-.logo{
-  position: absolute;
-}
-
 nav {
   display: flex;
   justify-content: center;
