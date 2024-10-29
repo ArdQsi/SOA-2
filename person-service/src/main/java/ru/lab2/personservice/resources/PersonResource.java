@@ -7,6 +7,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import ru.lab2.library.Person;
+import ru.lab2.personservice.dto.ErrorMessageDto;
 import ru.lab2.personservice.repostirory.PersonRepository;
 import java.util.List;
 
@@ -23,7 +24,8 @@ public class PersonResource {
     public Response getPersonById(@PathParam("id") int id) {
         Person person = personRepository.findById(id);
         if (person == null) {
-            return Response.status(Response.Status.NOT_FOUND).entity("Not found item").build();
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(new ErrorMessageDto(Response.Status.NOT_FOUND.getStatusCode(), "Not found item")).build();
         } else {
             return Response.ok(person).build();
         }
@@ -35,7 +37,8 @@ public class PersonResource {
             personRepository.save(person);
             return Response.ok(person).build();
         } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Validation Failed").build();
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new ErrorMessageDto(Response.Status.BAD_REQUEST.getStatusCode(), "Validation Failed")).build();
         }
     }
 
@@ -45,13 +48,15 @@ public class PersonResource {
         try{
             Person personToUpdate = personRepository.findById(id);
             if(personToUpdate == null) {
-                return Response.status(Response.Status.NOT_FOUND).entity("Not found item").build();
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity(new ErrorMessageDto(Response.Status.NOT_FOUND.getStatusCode(), "Not found item")).build();
             }
             person.setId(id);
             personRepository.update(person);
             return Response.ok(person).build();
         } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Validation Failed").build();
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new ErrorMessageDto(Response.Status.BAD_REQUEST.getStatusCode(), "Validation Failed")).build();
         }
     }
 
@@ -62,7 +67,8 @@ public class PersonResource {
             personRepository.delete(id);
             return Response.ok("Removal was successful").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.NOT_FOUND).entity("Not found item").build();
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(new ErrorMessageDto(Response.Status.NOT_FOUND.getStatusCode(), "Not found item")).build();
         }
     }
 
@@ -88,7 +94,8 @@ public class PersonResource {
                     coordinateY, creationDate, height, birthday, passportId, eyeColor, locationX, locationY, locationZ);
             return Response.ok(persons).build();
         } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Validation Failed").build();
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new ErrorMessageDto(Response.Status.BAD_REQUEST.getStatusCode(), "Validation Failed")).build();
         }
     }
 
@@ -99,7 +106,8 @@ public class PersonResource {
             Long count = personRepository.countByEyeColorLessThan(eyeColor);
             return Response.ok("amount: " + count).build();
         } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Validation Failed").build();
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new ErrorMessageDto(Response.Status.BAD_REQUEST.getStatusCode(), "Validation Failed")).build();
         }
     }
 
@@ -109,11 +117,13 @@ public class PersonResource {
         try {
             List<Person> persons = personRepository.filterByEyeColorLessThan(eyeColor);
             if(persons.isEmpty()) {
-                return Response.status(Response.Status.NOT_FOUND).entity("Not found item").build();
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity(new ErrorMessageDto(Response.Status.NOT_FOUND.getStatusCode(), "Not found item")).build();
             }
             return Response.ok(persons).build();
         } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Validation Failed").build();
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new ErrorMessageDto(Response.Status.BAD_REQUEST.getStatusCode(), "Validation Failed")).build();
         }
     }
 
@@ -122,15 +132,18 @@ public class PersonResource {
     public Response filterMoreHeight(@PathParam("height") Double height) {
         try {
             if (height == null){
-                return Response.status(Response.Status.BAD_REQUEST).entity("Validation Failed").build();
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity(new ErrorMessageDto(Response.Status.BAD_REQUEST.getStatusCode(), "Validation Failed")).build();
             }
             List<Person> persons = personRepository.filterByHeightMoreThan(height);
             if(persons.isEmpty()) {
-                return Response.status(Response.Status.NOT_FOUND).entity("Not found item").build();
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity(new ErrorMessageDto(Response.Status.NOT_FOUND.getStatusCode(), "Not found item")).build();
             }
             return Response.ok(persons).build();
         } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Validation Failed").build();
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new ErrorMessageDto(Response.Status.BAD_REQUEST.getStatusCode(), "Validation Failed")).build();
         }
     }
 }

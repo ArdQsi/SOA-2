@@ -1,4 +1,4 @@
 package com.example.demography.dto;
 
-public record ErrorMessageDto(Integer status, String message) {
+public record ErrorMessageDto(Integer code, String message) {
 }
