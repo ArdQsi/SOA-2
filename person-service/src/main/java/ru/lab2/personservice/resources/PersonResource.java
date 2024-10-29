@@ -86,9 +86,6 @@ public class PersonResource {
         try {
             List<Person> persons = personRepository.findAllPersonsByFilter(pageNumber, pageSize, id, name, coordinateX,
                     coordinateY, creationDate, height, birthday, passportId, eyeColor, locationX, locationY, locationZ);
-            if(persons.isEmpty()) {
-                return Response.status(Response.Status.NOT_FOUND).entity("Not found item").build();
-            }
             return Response.ok(persons).build();
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Validation Failed").build();

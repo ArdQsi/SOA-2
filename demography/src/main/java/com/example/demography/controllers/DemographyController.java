@@ -21,7 +21,7 @@ public class DemographyController {
         return new PercentageMassageDto(personService.getPercentageEyeColor(eyeColor));
     }
 
-    @GetMapping("{nationality}/eye-color/{eyeColor}")
+    @GetMapping("nationality/{nationality}/eye-color/{eyeColor}")
     public CountMessageDto getCountPersons(@PathVariable Nationality nationality, @PathVariable Color eyeColor){
         System.out.println(nationality + " " + eyeColor);
         return new CountMessageDto(personService.getCountByEyeColorAndNationality(eyeColor, nationality));

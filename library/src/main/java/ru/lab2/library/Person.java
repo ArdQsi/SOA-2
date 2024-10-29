@@ -1,12 +1,15 @@
 package ru.lab2.library;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.*;
+import lombok.AllArgsConstructor;
 import ru.lab2.library.converter.LocalDateDeserializer;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.lab2.library.converter.LocalDateSerializer;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -17,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name= "person")          
 public class Person {                                                                                  
     @Id
@@ -42,8 +46,10 @@ public class Person {
 
     @Column(nullable = false)
     @NotNull
-    @JsonSerialize(using = LocalDateSerializer.class)
-    @JsonDeserialize(using = LocalDateDeserializer.class)
+//    @JsonSerialize(using = LocalDateSerializer.class)
+//    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @JsonbDateFormat(value = "yyyy-MM-dd HH:mm")
     private LocalDateTime birthday; //Поле не может быть null
 
     @Column(nullable = false)

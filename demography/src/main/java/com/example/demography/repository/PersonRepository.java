@@ -1,5 +1,8 @@
 package com.example.demography.repository;
 
+import com.example.demography.execption.ResourceNotFoundException;
+import org.springframework.http.HttpStatusCode;
+import reactor.core.publisher.Flux;
 import ru.lab2.library.Person;
 import ru.lab2.library.Color;
 import lombok.RequiredArgsConstructor;
@@ -17,17 +20,26 @@ public class PersonRepository {
 
     @Autowired
     public PersonRepository(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8080").build();
+        this.webClient = webClientBuilder.baseUrl("https://localhost:8598/person-service-1.0-SNAPSHOT").build();
     }
 
     public Mono<List<Person>> getByAll() {
-        return webClient.get().uri("/persons/filter").retrieve().bodyToFlux(Person.class).collectList();
+        return webClient.get().uri("/persons/filter").retrieve()
+                .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> {
+                    return Mono.error(new ResourceNotFoundException("Not found item"));
+                } )
+                .bodyToFlux(Person.class).collectList();
     }
 
     public Mono<List<Person>> getByEyeColor(Color eyeColor) {
         return webClient.get().uri(uriBuilder -> uriBuilder
                 .path("/persons/filter")
                 .queryParam("eye-color", eyeColor)
-                .build()).retrieve().bodyToFlux(Person.class).collectList();
+                .build())
+                .retrieve()
+                .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> {
+                    return Mono.error(new ResourceNotFoundException("Not found item"));
+                } )
+                .bodyToFlux(Person.class).collectList();
     }
 }

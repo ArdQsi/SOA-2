@@ -14,10 +14,10 @@
         <class-name>org.postgresql.ds.PGSimpleDataSource</class-name>
         <server-name>localhost</server-name>
         <port-number>5432</port-number>
-        <database-name></database-name>
-        <user></user>
+        <database-name>person</database-name>
+        <user>postgres</user>
         <!-- Example of using a Payara password alias in the datasource definition -->
-        <password></password>
+        <password>DenDenvv</password>
         <!-- Example of how to use a Payara specific custom connection pool setting -->
         <property>
             <name>fish.payara.slow-query-threshold-in-seconds</name>
