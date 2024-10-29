@@ -10,10 +10,13 @@ const SearchPerson = () => {
 
     const handleSearchSubmit = async (e) => {
         e.preventDefault();
-        axios.get(`http://localhost:8080/persons/${id}`)
+        axios.get(`https://localhost:8081/person-service-1.0-SNAPSHOT/persons/${id}`)
             .then(function (response) {
-                setPerson(response.data)
-                setError(null)
+                if (response.data !== undefined){
+                    setPerson(response.data)
+                    setError(null)
+                }
+                
             })
             .catch(function (error) {
                 setPerson(null)
@@ -24,7 +27,7 @@ const SearchPerson = () => {
         <>
             <h1>Search person</h1>
             <form onSubmit={handleSearchSubmit}>
-                <InputField name="Id" value={id} type="text" setState={setId} />
+                <InputField name="Id" value={id} type="number" setState={setId} />
                 <button type="submit">Search person</button>
             </form>
             <div className='error'> {error} </div>

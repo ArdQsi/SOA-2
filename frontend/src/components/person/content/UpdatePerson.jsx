@@ -57,7 +57,7 @@ const UpdatePerson = () => {
             },
         };
 
-        axios.put(`http://localhost:8080/persons/${id}`, updatePerson)
+        axios.put(`http://localhost:8598/person-service-1.0-SNAPSHOT/persons/${id}`, updatePerson)
             .then(function (response) {
                 setError(null)
                 setInfo("The update was successful.")
@@ -71,18 +71,18 @@ const UpdatePerson = () => {
         <>
             <h1>Update person</h1>
             <form onSubmit={handleUpdateSubmit}>
-                <InputField name="Id" value={id} type="text" setState={setId} />
+                <InputField name="Id" value={id} type="number" setState={setId} />
                 <InputField name="Name" value={name} type="text" setState={setName} />
-                <InputField name="Coordinates X" value={x} type="number" setState={setX} />
-                <InputField name="Coordinates Y" value={y} type="number" setState={setY} />
-                <InputField name="Height" value={height} type="number" setState={setHeight} />
+                <InputField name="Coordinates X" value={x} type="number" step="0.01" setState={setX} />
+                <InputField name="Coordinates Y" value={y} type="number" step="0.01" setState={setY} />
+                <InputField name="Height" value={height} type="number" step="0.01" setState={setHeight} />
                 <InputField name="Birthday" value={height} type="datetime-local" setState={setBirthday} />
                 <InputField name="Passport ID" value={passportID} type="text" setState={setPassportID} />
                 <SelectField name="Nationality" value={nationality} options={nationalityOptions} setState={setNationality} />
                 <SelectField name="Eye color" value={eyeColor} options={eyeColorOptions} setState={setEyeColor} />
-                <InputField name="Location X" value={locationX} type="number" setState={setLocationX} />
-                <InputField name="Location Y" value={locationY} type="number" setState={setLocationY} />
-                <InputField name="Location Z" value={locationZ} type="number" setState={setLocationZ} />
+                <InputField name="Location X" value={locationX} type="number" step="0.01" setState={setLocationX} />
+                <InputField name="Location Y" value={locationY} type="number" step="0.01" setState={setLocationY} />
+                <InputField name="Location Z" value={locationZ} type="number" step="0.01" setState={setLocationZ} />
                 <button type="submit">Update person</button>
             </form>
             <div className='error'> {error} </div>

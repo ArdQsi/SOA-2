@@ -6,7 +6,7 @@ import ru.lab2.personservice.resources.PersonResource;
 import javax.ws.rs.core.Application;
 import java.util.Set;
 
-@javax.ws.rs.ApplicationPath("webresources")
+@javax.ws.rs.ApplicationPath("/")
 public class ApplicationConfig extends Application {
 
     @Override

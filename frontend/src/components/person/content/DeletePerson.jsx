@@ -11,7 +11,7 @@ const DeletePerson = () => {
     const handleDeleteSubmit = async (e) => {
         e.preventDefault();
 
-        axios.delete(`http://localhost:8080/persons/${id}`)
+        axios.delete(`https://localhost:8598/person-service-1.0-SNAPSHOT/persons/${id}`)
             .then(function (response) {
                 setInfo(response.data)
                 setError(null)
@@ -25,7 +25,7 @@ const DeletePerson = () => {
         <>
             <h1>Delete person</h1>
             <form onSubmit={handleDeleteSubmit}>
-                <InputField name="Id" value={id} type="text" setState={setId} />
+                <InputField name="Id" value={id} type="number" setState={setId} />
                 <button type="submit">Delete person</button>
             </form>
             <div className='info'> {info} </div>

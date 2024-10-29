@@ -58,7 +58,7 @@ const FilterPerson = () => {
     const handleFilterMainSubmit = async (e) => {
         e.preventDefault();
 
-        const url = new URL("http://localhost:8080/persons/filter");
+        const url = new URL("https://localhost:8598/person-service-1.0-SNAPSHOT/persons/filter");
         url.searchParams.append("page-number", pageNumber);
         url.searchParams.append("page-size", pageSize);
         if (id) url.searchParams.append("id", id);
@@ -92,22 +92,22 @@ const FilterPerson = () => {
             <form>
                 <InputField name="Page number" value={pageNumber} type="number" setState={setPageNumber} required={false} />
                 <InputField name="Page size" value={pageSize} type="number" setState={setPageSize} required={false} />
-                <InputField name="Id" value={id} type="text" setState={setId} required={false} />
+                <InputField name="Id" value={id} type="number" setState={setId} required={false} />
                 <InputField name="Name" value={name} type="text" setState={setName} required={false} />
-                <InputField name="Coordinates X" value={x} type="number" setState={setX} required={false} />
-                <InputField name="Coordinates Y" value={y} type="number" setState={setY} required={false} />
-                <InputField name="Height" value={height} type="number" setState={setHeight} required={false} />
+                <InputField name="Coordinates X" value={x} type="number" step="0.01" setState={setX} required={false} />
+                <InputField name="Coordinates Y" value={y} type="number" step="0.01" setState={setY} required={false} />
+                <InputField name="Height" value={height} type="number" step="0.01" setState={setHeight} required={false} />
                 <InputField name="Birthday" value={birthday} type="datetime-local" setState={setBirthday} required={false} />
                 <InputField name="Creation Date" value={creationDate} type="datetime-local" setState={setCreationDate} required={false} />
                 <InputField name="Passport ID" value={passportID} type="text" setState={setPassportID} required={false} />
                 <SelectField name="Nationality" value={nationality} options={nationalityOptions} setState={setNationality} required={false} />
                 <SelectField name="Eye color" value={eyeColor} options={eyeColorOptions} setState={setEyeColor} required={false} />
-                <InputField name="Location X" value={locationX} type="number" setState={setLocationX} required={false} />
-                <InputField name="Location Y" value={locationY} type="number" setState={setLocationY} required={false} />
-                <InputField name="Location Z" value={locationZ} type="number" setState={setLocationZ} required={false} />
+                <InputField name="Location X" value={locationX} type="number" step="0.01" setState={setLocationX} required={false} />
+                <InputField name="Location Y" value={locationY} type="number" step="0.01" setState={setLocationY} required={false} />
+                <InputField name="Location Z" value={locationZ} type="number" step="0.01" setState={setLocationZ} required={false} />
                 <button type="submit" onClick={handleFilterMainSubmit}>Filter persons</button>
-                <button type="submit" onClick={(event) => handleFilterSubmit(event, `http://localhost:8080/persons/filter/less/${eyeColor}`)}>Filter persons with eye color less than {eyeColor}</button>
-                <button type="submit" onClick={(event) => handleFilterSubmit(event, `http://localhost:8080/persons/filter/more/${height}`)}>Filter persons with height greater than {height}</button>
+                <button type="submit" onClick={(event) => handleFilterSubmit(event, `https://localhost:8598/person-service-1.0-SNAPSHOT/persons/filter/less/${eyeColor}`)}>Filter persons with eye color less than {eyeColor}</button>
+                <button type="submit" onClick={(event) => handleFilterSubmit(event, `https://localhost:8598/person-service-1.0-SNAPSHOT/persons/filter/more/${height}`)}>Filter persons with height greater than {height}</button>
             </form>
 
             {error ? <div className='error'> {error} </div > :
