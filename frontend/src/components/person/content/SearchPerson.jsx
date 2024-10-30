@@ -10,7 +10,7 @@ const SearchPerson = () => {
 
     const handleSearchSubmit = async (e) => {
         e.preventDefault();
-        axios.get(`https://localhost:8081/person-service-1.0-SNAPSHOT/persons/${id}`)
+        axios.get(`https://localhost:8598/person-service-1.0-SNAPSHOT/persons/${id}`)
             .then(function (response) {
                 if (response.data !== undefined){
                     setPerson(response.data)

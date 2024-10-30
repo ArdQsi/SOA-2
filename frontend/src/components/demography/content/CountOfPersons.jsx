@@ -28,7 +28,7 @@ const CountOfPersons = () => {
     const handleCountSubmit = async (e) => {
         e.preventDefault();
 
-        axios.get(`https://localhost:8444/demography/${nationality}/eye-color/${eyeColor}`)
+        axios.get(`https://localhost:8444/demography/nationality/${nationality}/eye-color/${eyeColor}`)
             .then(function (response) {
                 setCount(response.data)
                 setError(null)
