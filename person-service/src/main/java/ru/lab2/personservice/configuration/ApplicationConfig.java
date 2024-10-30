@@ -16,9 +16,12 @@ public class ApplicationConfig extends Application {
         return resources;
     }
 
+
+
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(HelloResource.class);
         resources.add(PersonResource.class);
+        resources.add(CORSFilter.class);
     }
 
 }

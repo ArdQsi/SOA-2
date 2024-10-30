@@ -21,7 +21,7 @@ const PercentageOfPersons = () => {
 
         axios.get(`https://localhost:8444/demography/${eyeColor}/percentage`)
             .then(function (response) {
-                setPercentage(response.data)
+                setPercentage(response.data.percentage)
                 setError(null)
             })
             .catch(function (error) {
@@ -35,11 +35,7 @@ const PercentageOfPersons = () => {
                 <SelectField name="eyeColor" value={eyeColor} options={eyeColorOptions} setState={setEyeColor} />
                 <button type="submit">Get percentage of person, where eye color less than {eyeColor}</button>
             </form>
-            {percentage && (
-                <>
-                    {percentage}
-                </>
-            )}
+            {percentage}
             <div className='error'> {error} </div>
         </>
     );
