@@ -26,7 +26,7 @@ const CreatePerson = () => {
             })
             .catch(function (error) {
                 setAmount(null)
-                setError(error.response.data)
+                setError(error.response.data.message)
             });
     };
     return (

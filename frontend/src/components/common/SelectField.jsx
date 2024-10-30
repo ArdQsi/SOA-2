@@ -4,7 +4,7 @@ const SelectField = ({ name, value, options, setState, required = true }) => {
 
     return (
         <div className="input-container">
-            <label for={value}> {name}</label>
+            <label htmlFor={value}> {name}</label>
                 <select name={name} id={value} value={value} onChange={(e) => setState(e.target.value)}
                     required={required}
                 >

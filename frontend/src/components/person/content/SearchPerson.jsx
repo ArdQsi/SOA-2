@@ -20,7 +20,7 @@ const SearchPerson = () => {
             })
             .catch(function (error) {
                 setPerson(null)
-                setError(error.response.data)
+                setError(error.response.data.message)
             });
     };
     return (

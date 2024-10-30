@@ -50,7 +50,7 @@ const FilterPerson = () => {
                 if (error.response.data === ""){
                     setError("You must specify height for filtering")
                 } else {
-                    setError(error.response.data)
+                    setError(error.response.data.message)
                 }
             });
     }

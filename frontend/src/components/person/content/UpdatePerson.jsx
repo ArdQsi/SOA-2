@@ -57,14 +57,14 @@ const UpdatePerson = () => {
             },
         };
 
-        axios.put(`http://localhost:8598/person-service-1.0-SNAPSHOT/persons/${id}`, updatePerson)
+        axios.put(`https://localhost:8598/person-service-1.0-SNAPSHOT/persons/${id}`, updatePerson)
             .then(function (response) {
                 setError(null)
                 setInfo("The update was successful.")
             })
             .catch(function (error) {
                 setInfo(null)
-                setError(error.response.data)
+                setError(error.response.data.message)
             });
     };
     return (
