@@ -30,7 +30,7 @@ const CountOfPersons = () => {
 
         axios.get(`https://localhost:8444/demography/nationality/${nationality}/eye-color/${eyeColor}`)
             .then(function (response) {
-                setCount(response.data)
+                setCount(response.data.count)
                 setError(null)
             })
             .catch(function (error) {
@@ -45,7 +45,7 @@ const CountOfPersons = () => {
                 <SelectField name="nationality" value={nationality} options={nationalityOptions} setState={setNationality} />
                 <button type="submit">Count of person with eyeColor {eyeColor} and nationality {nationality}</button>
             </form>
-            {count && {count}}
+            {count}
             <div className='error'> {error} </div>
         </>
     );

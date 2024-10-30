@@ -63,7 +63,7 @@ const CreatePerson = () => {
             })
             .catch(function (error) {
                 setInfo(null)
-                setError(error.response.data)
+                setError(error.response.data.message)
             });
     };
     return (

@@ -46,10 +46,6 @@ public class Person {
 
     @Column(nullable = false)
     @NotNull
-//    @JsonSerialize(using = LocalDateSerializer.class)
-//    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-    @JsonbDateFormat(value = "yyyy-MM-dd HH:mm")
     private LocalDateTime birthday; //Поле не может быть null
 
     @Column(nullable = false)
