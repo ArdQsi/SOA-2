@@ -47,7 +47,7 @@ const FilterPerson = () => {
                 setPeople(response.data);
             })
             .catch(function (error) {
-                if (error.response.data === ""){
+                if (error.response.status === 404){
                     setError("You must specify height for filtering")
                 } else {
                     setError(error.response.data.message)
@@ -82,7 +82,7 @@ const FilterPerson = () => {
             })
             .catch(function (error) {
                 setPeople(null);
-                setError(error.response.data)
+                setError(error.response.data.message)
             });
     };
 
@@ -122,6 +122,7 @@ const FilterPerson = () => {
                                 <th>Creation Date</th>
                                 <th>Height</th>
                                 <th>Birthday</th>
+                                <th>Nationality</th>
                                 <th>Passport ID</th>
                                 <th>Eye Color</th>
                                 <th>Location</th>
@@ -136,6 +137,7 @@ const FilterPerson = () => {
                                     <td>{person.creationDate}</td>
                                     <td>{person.height}</td>
                                     <td>{person.birthday}</td>
+                                    <td>{person.nationality}</td>
                                     <td>{person.passportID}</td>
                                     <td>{person.eyeColor}</td>
                                     <td>({person.location.x}, {person.location.y}, {person.location.z})</td>

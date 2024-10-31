@@ -85,13 +85,14 @@ public class PersonResource {
                                           @QueryParam("birthday")  String birthday,
                                           @QueryParam("passport-id")  String passportId,
                                           @QueryParam("eye-color")  String eyeColor,
+                                          @QueryParam("nationality")  String nationality,
                                           @QueryParam("location-x")  Integer locationX,
                                           @QueryParam("location-y")  Double locationY,
                                           @QueryParam("location-z")  Float locationZ
                                           ) {
         try {
             List<Person> persons = personRepository.findAllPersonsByFilter(pageNumber, pageSize, id, name, coordinateX,
-                    coordinateY, creationDate, height, birthday, passportId, eyeColor, locationX, locationY, locationZ);
+                    coordinateY, creationDate, height, birthday, passportId, eyeColor, locationX, locationY, locationZ, nationality);
             return Response.ok(persons).build();
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST)

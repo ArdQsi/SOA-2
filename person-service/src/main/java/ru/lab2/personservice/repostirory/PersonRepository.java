@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 import javax.ws.rs.ext.Provider;
 
 import ru.lab2.library.Color;
+import ru.lab2.library.Nationality;
 import ru.lab2.library.Person;
 
 import java.util.ArrayList;
@@ -57,7 +58,9 @@ public class PersonRepository {
                                          String eyeColor,
                                          Integer locationX,
                                          Double locationY,
-                                         Float locationZ) {
+                                         Float locationZ,
+                                         String nationality
+    ) {
 
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<Person> criteriaQuery = builder.createQuery(Person.class);
@@ -99,6 +102,9 @@ public class PersonRepository {
         }
         if (locationZ!=null){
             predicates.add(builder.equal(person.get("location").get("z"), locationZ));
+        }
+        if (nationality != null) {
+            predicates.add(builder.equal(person.get("nationality"), Nationality.valueOf(nationality)));
         }
 
         criteriaQuery.where(predicates.toArray(new Predicate[0]));
